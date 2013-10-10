@@ -14,13 +14,73 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install virtus-rom
 
 ## Usage
 
-TODO: Write usage instructions here
+To use Virtus::ROM, you'll need to first define the ROM repository.
+We'd recommend that you do this in your configuration setup (i.e. a Rails initializer):
+
+```ruby
+env = ROM::Environment.setup(default: 'memory://test')
+```
+
+Then simply add `include Virtus::ROM.model` to your model class, and define the model attributes using Virtus.
+For example:
+
+```ruby
+class User
+  include Virtus::ROM.model
+
+  attribute :name, String, from: :first_name
+  attribute :age, Integer, required: false
+end
+```
+
+Virtus::ROM will use the `default` repository by default, but you can override with a `repository` directive:
+
+```ruby
+env = ROM::Environment.setup(pg: 'postgres://localhost/pg')
+
+class User
+  include Virtus::ROM.model
+
+  repository :pg
+
+  attribute :name, String, from: :first_name
+  attribute :age, Integer, required: false
+end
+```
+
+By default, Virtus::ROM will use a table within the repository with the pluralized/underscored name of the class.
+This can be overridden with a `table` directive:
+
+```ruby
+class User
+  include Virtus::ROM.model
+
+  table :all_users # Should probably use a less DB-oriented term - relation?
+
+  attribute :name, String, from: :first_name
+  attribute :age, Integer, required: false
+end
+```
+
+Once you've defined your model, a ROM mapping will be created for you, and you can then use ROM as you normally would:
+
+```ruby
+env = ROM::Environment.setup(default: 'memory://test')
+
+class User
+  include Virtus::ROM.model
+
+  attribute :name, String, from: :first_name
+  attribute :age, Integer, required: false
+end
+
+env[:users].save(User.new(name: 'Craig'))
+craig = env[:users].restrict(name: 'Craig').one
+```
+
 
 ## Contributing
 
