@@ -5,11 +5,12 @@ require 'virtus/rom/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "virtus-rom"
-  spec.version       = Virtus::Rom::VERSION
+  spec.version       = Virtus::ROM::VERSION
   spec.authors       = ["Craig Buchek"]
   spec.email         = ["craig@boochtek.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Use Virtus to define ROM (Ruby Object Mapper) model attributes}
+  spec.summary       = %q{Use Virtus to define ROM (Ruby Object Mapper) model attributes}
+  spec.homepage      = "https://github.com/boochtek/virtus-rom"
   spec.homepage      = ""
   spec.license       = "MIT"
 

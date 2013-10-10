@@ -1,7 +1,8 @@
-require "virtus/rom/version"
+require 'virtus'
+require 'virtus/rom/version'
 
 module Virtus
-  module Rom
-    # Your code goes here...
+  module ROM
+
   end
 end

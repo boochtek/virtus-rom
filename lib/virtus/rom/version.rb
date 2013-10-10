@@ -1,5 +1,5 @@
 module Virtus
-  module Rom
+  module ROM
     VERSION = "0.0.1"
   end
 end

@@ -1,6 +1,8 @@
-# Virtus::Rom
+# Virtus::ROM
 
-TODO: Write a gem description
+This gem will allow you to use Virtus to define ROM (Ruby Object Mapper) model attributes.
+It will also automatically map the model objects for you.
+
 
 ## Installation
 
