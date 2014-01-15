@@ -36,15 +36,13 @@ class User
 end
 ```
 
-Virtus::ROM will use the `default` repository by default, but you can override with a `repository` directive:
+Virtus::ROM will use the `default` repository by default, but you can override with a `repository` option:
 
 ```ruby
 env = ROM::Environment.setup(pg: 'postgres://localhost/pg')
 
 class User
-  include Virtus::ROM.model
-
-  repository :pg
+  include Virtus::ROM.model(repository: :pg)
 
   attribute :name, String, from: :first_name
   attribute :age, Integer, required: false
@@ -52,13 +50,11 @@ end
 ```
 
 By default, Virtus::ROM will use a table within the repository with the pluralized/underscored name of the class.
-This can be overridden with a `table` directive:
+This can be overridden with a `table` or `relation` directive (they're equivalent):
 
 ```ruby
 class User
-  include Virtus::ROM.model
-
-  table :all_users # Should probably use a less DB-oriented term - relation?
+  include Virtus::ROM.model(table: :all_users)
 
   attribute :name, String, from: :first_name
   attribute :age, Integer, required: false
@@ -86,6 +82,7 @@ craig = env[:users].restrict(name: 'Craig').one
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+3. Make sure the tests pass (`rspec` or `rake spec`)
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create new Pull Request
